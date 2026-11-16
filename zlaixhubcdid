@@ -57,7 +57,7 @@ local function ensureLogoAsset()
     pcall(function()
         if writefile and isfile and not isfile(targetFile) then
             if fReq then
-                local res = fReq({ Url = "http://localhost:3000/logo.png", Method = "GET" })
+                local res = fReq({ Url = "http://192.168.1.7:3000/logo.png", Method = "GET" })
                 if res and res.StatusCode == 200 and res.Body and #res.Body > 100 then
                     writefile(targetFile, res.Body)
                 end
@@ -316,7 +316,7 @@ local function checkKeyUniversal(key, onStatus)
     pcall(function()
         if fRequest then
             local res = fRequest({
-                Url = "http://localhost:3000/api/keys/verify",
+                Url = "http://192.168.1.7:3000/api/keys/verify",
                 Method = "POST",
                 Headers = { ["Content-Type"] = "application/json" },
                 Body = HttpService:JSONEncode({
@@ -4236,7 +4236,7 @@ local function ensureCustomAssetFile(fileName, webPath)
     local fReq = request or http_request or syn_request or (http and http.request) or (syn and syn.request)
     pcall(function()
         if writefile and isfile and not isfile(fileName) and fReq then
-            local res = fReq({ Url = (WebServerUrl or "http://localhost:3000") .. webPath, Method = "GET" })
+            local res = fReq({ Url = (WebServerUrl or "http://192.168.1.7:3000") .. webPath, Method = "GET" })
             if res and res.StatusCode == 200 and res.Body and #res.Body > 64 then
                 writefile(fileName, res.Body)
             end
